@@ -1,3 +1,4 @@
+
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -14,37 +15,12 @@
 # Written by Frederic PONT.
 # (c) Frederic Pont 2024
 
-
-using Test
-using FilePathsBase
-
-include("src/string_process.jl") 
-include("src/unit_test.jl") 
-include("src/list_files.jl")
-include("src/rename.jl")
-include("src/title.jl")
-
-
-function main()
-    title()
-    test()
-    if length(ARGS) < 1
-        println("dir name is missing as argument. ex : julia main.jl test/")
-        return
-    end
-    dir = ARGS[1]
-
-    list_files_dirs_recursively(dir)
-
-    println("to rename the files, press y")
-    input = readline(stdin)
-
-    if input == "y"
-        rename_files_recursively(dir)
-        rename_dir_recursively(dir)
-    end
-
-
+function clean_string(str::AbstractString)
+    # The regular expression r"[^\w\s.\-_]" matches any whitespace characters \s 
+    # and any non-word characters \w, dot, - and _
+    str = replace(str, r"[^\w\s.\-_]" => "")
+    str = replace(str, r"[\s]+" => "_")
+    str = replace(str, r"[à]+" => "a")
+    str = replace(str, r"[éèêë]+" => "e")
+    return str
 end
-
-main()

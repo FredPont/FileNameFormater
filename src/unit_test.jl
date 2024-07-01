@@ -14,37 +14,19 @@
 # Written by Frederic PONT.
 # (c) Frederic Pont 2024
 
-
 using Test
-using FilePathsBase
-
-include("src/string_process.jl") 
-include("src/unit_test.jl") 
-include("src/list_files.jl")
-include("src/rename.jl")
-include("src/title.jl")
 
 
-function main()
-    title()
-    test()
-    if length(ARGS) < 1
-        println("dir name is missing as argument. ex : julia main.jl test/")
-        return
+
+function test()
+    @testset "clean_string test" begin
+        str = "Hello, this is a string with spécial chàracters and spaces!"
+        @test clean_string(str) ==
+              "Hello_this_is_a_string_with_special_characters_and_spaces"
+        @test clean_string("file.txt") == "file.txt"
+        @test clean_string("file_1.txt") == "file_1.txt"
+        @test clean_string("file-1.txt") == "file-1.txt"
+        @test clean_string("file&1.txt") == "file1.txt"
     end
-    dir = ARGS[1]
-
-    list_files_dirs_recursively(dir)
-
-    println("to rename the files, press y")
-    input = readline(stdin)
-
-    if input == "y"
-        rename_files_recursively(dir)
-        rename_dir_recursively(dir)
-    end
-
 
 end
-
-main()

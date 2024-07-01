@@ -15,36 +15,9 @@
 # (c) Frederic Pont 2024
 
 
-using Test
-using FilePathsBase
-
-include("src/string_process.jl") 
-include("src/unit_test.jl") 
-include("src/list_files.jl")
-include("src/rename.jl")
-include("src/title.jl")
-
-
-function main()
-    title()
-    test()
-    if length(ARGS) < 1
-        println("dir name is missing as argument. ex : julia main.jl test/")
-        return
-    end
-    dir = ARGS[1]
-
-    list_files_dirs_recursively(dir)
-
-    println("to rename the files, press y")
-    input = readline(stdin)
-
-    if input == "y"
-        rename_files_recursively(dir)
-        rename_dir_recursively(dir)
-    end
-
-
+function title()
+    println("   ┌────────────────────────────────────────────┐") # unicode U+250C
+    println("   │   Format File Names (c)Frederic PONT 2024  │")
+    println("   │  Free Software GNU General Public License  │")
+    println("   └────────────────────────────────────────────┘")
 end
-
-main()
