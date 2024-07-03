@@ -1,4 +1,3 @@
-
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -15,12 +14,21 @@
 # Written by Frederic PONT.
 # (c) Frederic Pont 2024
 
-function clean_string(str::AbstractString)
 
-    for i in 2:size(rules)[1] # :2 to skip first line
-        str = replace(str, Regex(rules[i,1]) => rules[i,2])
+using Pkg
+
+# install packages automatically
+function pkgAdd(list::Array{String,1})
+    for p in list
+        if !haskey(Pkg.project().dependencies, p)
+            Pkg.add(p)
+        end
     end
-
-
-    return str
 end
+
+pk = ["FilePathsBase"]
+pkgAdd(pk)
+
+println("Precompilation...")
+
+using FilePathsBase

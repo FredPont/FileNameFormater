@@ -15,15 +15,18 @@
 # (c) Frederic Pont 2024
 
 
-using Test
-using FilePathsBase
+# using Test
+# using FilePathsBase
 
+include("src/installPKG.jl")
 include("src/string_process.jl") 
 include("src/unit_test.jl") 
 include("src/list_files.jl")
 include("src/rename.jl")
 include("src/title.jl")
+include("src/readConf.jl")
 
+rules = readRegex()
 
 function main()
     title()

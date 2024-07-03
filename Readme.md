@@ -7,6 +7,7 @@ File Name Formater is a software to rename recursively files and folders, removi
 # Quick start
 - install [Julia](https://julialang.org/downloads/)
 - open a terminal
+- to customise the characaters replacement rules, edit the file conf/rules.csv (TAB seprator)
 - start the software using the syntax :
 
 ```

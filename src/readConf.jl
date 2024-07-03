@@ -1,4 +1,3 @@
-
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -15,12 +14,8 @@
 # Written by Frederic PONT.
 # (c) Frederic Pont 2024
 
-function clean_string(str::AbstractString)
+using DelimitedFiles
 
-    for i in 2:size(rules)[1] # :2 to skip first line
-        str = replace(str, Regex(rules[i,1]) => rules[i,2])
-    end
-
-
-    return str
+function readRegex()
+    return readdlm("conf/rules.csv", '\t')
 end
