@@ -15,9 +15,13 @@
 # Written by Frederic PONT.
 # (c) Frederic Pont 2024
 
-function stringProcess(str::AbstractString, config::Conf)
+function stringProcess(str::AbstractString, config::Conf, isFile::Bool)::AbstractString
     cleanStr = clean_string(str)
-
+    if isFile && config.cutFileNames
+        return cutString(cleanStr, config.maxFileChar)
+    elseif !isFile && config.cutDirNames
+        return cutString(cleanStr, config.maxDireChar)
+    end
 end
 
 
