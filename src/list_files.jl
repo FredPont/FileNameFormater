@@ -16,9 +16,9 @@
 
 using FilePathsBase
 
-function list_files_dirs_recursively(path)
-    list_files_recursively(path)
-    list_dir_recursively(path)
+function list_files_dirs_recursively(config::Conf)
+    list_files_recursively(config.path)
+    list_dir_recursively(config.path)
 end
 
 function list_files_recursively(path)

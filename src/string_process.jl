@@ -16,7 +16,7 @@
 # (c) Frederic Pont 2024
 
 function clean_string(str::AbstractString)
-
+    rules = config.rules
     for i in 2:size(rules)[1] # :2 to skip first line
         str = replace(str, Regex(rules[i,1]) => rules[i,2])
     end
