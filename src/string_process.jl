@@ -15,6 +15,12 @@
 # Written by Frederic PONT.
 # (c) Frederic Pont 2024
 
+function stringProcess(str::AbstractString, config::Conf)
+    cleanStr = clean_string(str)
+
+end
+
+
 function clean_string(str::AbstractString)
     rules = config.rules
     for i = 2:size(rules)[1] # :2 to skip first line

@@ -22,12 +22,16 @@
 mutable struct Conf
     rules::Matrix{Any}
     path::String
+    maxFileChar::Int  # max number of characters in filename
+    cutFileNames::Bool
+    maxDireChar::Int  # max number of characters in directory
+    cutDirNames::Bool
 end
 
 
 include("src/installPKG.jl")
-include("src/string_process.jl") 
-include("src/unit_test.jl") 
+include("src/string_process.jl")
+include("src/unit_test.jl")
 include("src/list_files.jl")
 include("src/rename.jl")
 include("src/title.jl")
@@ -37,7 +41,7 @@ include("src/readConf.jl")
 
 
 
-config = Conf(readRegex(), "")    # software preferences
+config = Conf(readRegex(), "", 30, false, 30, false)    # software preferences
 
 function main()
     title()

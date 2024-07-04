@@ -30,19 +30,20 @@ function rename_files_recursively(path)
 end
 
 function rename_dir_recursively(path)
-    dirs = readdir(path)
-    for d in dirs
-        old_path = joinpath(path, d)
-        new_path = joinpath(path, clean_string(d))
-        if old_path != new_path
-            println("old_path : $old_path -> $new_path")
-            try
-                mv(old_path, new_path)
-                rename_dir_recursively(new_path)
-            catch
-                @warn "$new_path not converted"
+    for (root, dirs, files) in walkdir(path)
+        for d in dirs
+            old_path = joinpath(path, d)
+            new_path = joinpath(path, clean_string(d))
+            if old_path != new_path
+                println("old_path : $old_path -> $new_path")
+                try
+                    mv(old_path, new_path)
+                    rename_dir_recursively(new_path)
+                catch
+                    @warn "$new_path not converted"
+                end
+                println("Renamed directory: $old_path -> $new_path")
             end
-            println("Renamed directory: $old_path -> $new_path")
         end
     end
 end
