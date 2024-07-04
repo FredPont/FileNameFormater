@@ -51,13 +51,3 @@ function list_dir_recursively(path)
     end
 end
 
-# function list_dir_recursively(path)
-#     dirs = readdir(path)
-#     for d in dirs
-#         old_path = joinpath(path, d)
-#         new_path = joinpath(path, clean_string(d))
-#         if old_path != new_path
-#             println("Rename dir : $old_path -> $new_path")
-#         end
-#     end
-# end
