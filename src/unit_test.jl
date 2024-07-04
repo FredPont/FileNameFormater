@@ -29,4 +29,8 @@ function test()
         @test clean_string("file&1.txt") == "file1.txt"
     end
 
+    @testset "Regex test" begin
+        @test replace("Hello, this is a string with spécial chàracters and spaces!", r"[^\w\s.\-_]+" => "") == "Hello this is a string with spécial chàracters and spaces"
+    end
+
 end
