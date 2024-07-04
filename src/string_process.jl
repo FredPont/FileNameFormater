@@ -17,10 +17,19 @@
 
 function clean_string(str::AbstractString)
     rules = config.rules
-    for i in 2:size(rules)[1] # :2 to skip first line
-        str = replace(str, Regex(rules[i,1]) => rules[i,2])
+    for i = 2:size(rules)[1] # :2 to skip first line
+        str = replace(str, Regex(rules[i, 1]) => rules[i, 2])
     end
-
-
     return str
+end
+
+
+function cutString(str::AbstractString, maxCharNumber::Int)
+    # get file extension if exists
+    root, ext = splitext(str)
+    if maxCharNumber < length(ext) + 3  # do not cut string under 3 char
+        return str
+    else
+        return str[1:(maxCharNumber-length(ext))] * ext   # cut the string to maxCharNumber and substract the extension length
+    end
 end

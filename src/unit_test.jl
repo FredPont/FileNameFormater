@@ -19,6 +19,8 @@ using Test
 
 
 function test()
+    println("Unit test")
+    println(".................")
     @testset "clean_string test" begin
         str = "Hello, this is a string with spécial chàracters and spaces!"
         @test clean_string(str) ==
@@ -33,4 +35,12 @@ function test()
         @test replace("Hello, this is a string with spécial chàracters and spaces!", r"[^\w\s.\-_]+" => "") == "Hello this is a string with spécial chàracters and spaces"
     end
 
+    @testset "cut string test" begin
+         @test cutString("textfilename.txt", 7) == "tex.txt"
+        @test cutString("text.txt", 5) == "text.txt"
+        @test cutString("textfilename", 5) == "textf"
+        @test cutString("text.txt", 3) == "text.txt"
+    end
+    println("end test")
+    println(".................")
 end
