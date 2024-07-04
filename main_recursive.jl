@@ -18,6 +18,13 @@
 # using Test
 # using FilePathsBase
 
+
+mutable struct Conf
+    rules::Matrix{Any}
+    path::String
+end
+
+
 include("src/installPKG.jl")
 include("src/string_process.jl") 
 include("src/unit_test.jl") 
@@ -26,7 +33,11 @@ include("src/rename.jl")
 include("src/title.jl")
 include("src/readConf.jl")
 
-rules = readRegex()
+
+
+
+
+config = Conf(readRegex(), "")    # software preferences
 
 function main()
     title()
@@ -36,8 +47,9 @@ function main()
         return
     end
     dir = ARGS[1]
+    config.path = dir
 
-    list_files_dirs_recursively(dir)
+    list_files_dirs_recursively(config)
 
     println("to rename the files, press y")
     input = readline(stdin)
