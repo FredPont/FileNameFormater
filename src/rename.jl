@@ -38,14 +38,17 @@ function rename_dir_recursively(path)
 				println("old_path : $old_path -> $new_path")
 				try
 					mv(old_path, new_path)
-					rename_dir_recursively(new_path)
+					#rename_dir_recursively(new_path)
 				catch err
 					# Print the error message
 					showerror(stdout, err)
 					#@warn "$new_path not converted"
 				end
 				println("Renamed directory: $old_path -> $new_path")
-				#rename_dir_recursively(new_path)
+				println(old_path, "===========>", dirs)
+				filter!(x -> x != basename(old_path), dirs)
+				#print(dirs)
+				rename_dir_recursively(new_path)
 			end
 		end
 	end
