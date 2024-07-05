@@ -16,8 +16,6 @@
 
 using Test
 
-
-
 function test()
     println("Unit test")
     println(".................")
@@ -37,7 +35,7 @@ function test()
 
     @testset "cut string test" begin
          @test cutString("textfilename.txt", 7) == "tex.txt"
-        @test cutString("text.txt", 5) == "text.txt"
+        @test cutString("text.txt", 5) == "t.txt"
         @test cutString("textfilename", 5) == "textf"
         @test cutString("text.txt", 3) == "text.txt"
     end

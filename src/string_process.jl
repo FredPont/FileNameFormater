@@ -15,31 +15,35 @@
 # Written by Frederic PONT.
 # (c) Frederic Pont 2024
 
-function stringProcess(str::AbstractString, config::Conf, isFile::Bool)::AbstractString
-    cleanStr = clean_string(str)
-    if isFile && config.cutFileNames
-        return cutString(cleanStr, config.maxFileChar)
-    elseif !isFile && config.cutDirNames
-        return cutString(cleanStr, config.maxDirChar)
-    end
+function stringProcess(str::AbstractString, config::Conf; isFile::Bool = true)::AbstractString
+	cleanStr = clean_string(str)
+	if isFile && config.cutFileNames
+		return cutString(cleanStr, config.maxFileChar)
+	elseif !isFile && config.cutDirNames
+		return cutString(cleanStr, config.maxDirChar)
+	else
+		return cleanStr
+	end
 end
 
 
 function clean_string(str::AbstractString)
-    rules = config.rules
-    for i = 2:size(rules)[1] # :2 to skip first line
-        str = replace(str, Regex(rules[i, 1]) => rules[i, 2])
-    end
-    return str
+	rules = config.rules
+	for i ∈ 2:size(rules)[1] # :2 to skip first line
+		str = replace(str, Regex(rules[i, 1]) => rules[i, 2])
+	end
+	return str
 end
 
 
 function cutString(str::AbstractString, maxCharNumber::Int)
-    # get file extension if exists
-    root, ext = splitext(str)
-    if maxCharNumber < length(ext) + 3  # do not cut string under 3 char
-        return str
-    else
-        return str[1:(maxCharNumber-length(ext))] * ext   # cut the string to maxCharNumber and substract the extension length
-    end
+	# get file extension if exists
+	root, ext = splitext(str)
+	if maxCharNumber < length(ext) + 1 || length(str) + 1 < maxCharNumber # do not cut string under 1 char
+		return str
+	elseif length(str) > maxCharNumber - length(ext)
+		return str[1:(maxCharNumber-length(ext))] * ext   # cut the string to maxCharNumber and substract the extension length
+	else
+		return str
+	end
 end
