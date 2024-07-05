@@ -7,9 +7,10 @@ File Name Formater is a software to rename recursively files and folders, removi
 # Quick start
 - install [Julia](https://julialang.org/downloads/)
 - open a terminal
-- to customise the characters replacement rules, edit the file conf/rules.csv (TAB seprator)
-- to enable file and/or dir names truncation, edit the file conf/conf.json.
-CAUTION there is no recovery possible after file/dir names truncation. You use this feature at your own risks.
+- to customise the characters replacement rules, edit the file ```conf/rules.csv ```(TAB seprator)
+- to enable file and/or dir names truncation, edit the file ```conf/conf.json```.
+CAUTION there is no recovery possible after file/dir names truncation.
+You use this feature at your own risks.
 
 ```
 path = directory to analyse path
@@ -35,11 +36,7 @@ rules : do no edit, rules are loaded from the conf/rules.csv file, easier to edi
 - start the software using the syntax :
 
 ```
-julia main_recursive.jl path/   
-
-# example to analyse the test directory
-julia main_recursive.jl test/   
-
+julia main.jl 
 ```
 
 # ScreenShots
