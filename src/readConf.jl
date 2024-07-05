@@ -15,7 +15,18 @@
 # (c) Frederic Pont 2024
 
 using DelimitedFiles
+using JSON3
 
 function readRegex()
     return readdlm("conf/rules.csv", '\t')
+end
+
+function readConf()
+    # Read the JSON file into a string
+    json_string = read("conf/conf.json", String)
+
+    # Parse the JSON string into a Julia struct
+    userConf = JSON3.read(json_string, Conf)
+
+    return userConf
 end

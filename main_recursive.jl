@@ -20,11 +20,11 @@
 
 
 mutable struct Conf
-    rules::Matrix{Any}
     path::String
+    rules
     maxFileChar::Int  # max number of characters in filename
     cutFileNames::Bool
-    maxDireChar::Int  # max number of characters in directory
+    maxDirChar::Int  # max number of characters in directory
     cutDirNames::Bool
 end
 
@@ -41,17 +41,19 @@ include("src/readConf.jl")
 
 
 
-config = Conf(readRegex(), "", 30, false, 30, false)    # software preferences
+#global config = Conf(readRegex(), "", 30, false, 30, false)    # software preferences
+global config = readConf()    # software preferences
+config.rules = readRegex()
 
 function main()
     title()
     test()
-    if length(ARGS) < 1
-        println("dir name is missing as argument. ex : julia main.jl test/")
-        return
-    end
-    dir = ARGS[1]
-    config.path = dir
+    # if length(ARGS) < 1
+    #     println("dir name is missing as argument. ex : julia main.jl test/")
+    #     return
+    # end
+    # dir = ARGS[1]
+    # config.path = dir
 
     list_files_dirs_recursively(config)
 

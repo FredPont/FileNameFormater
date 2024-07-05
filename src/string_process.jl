@@ -20,7 +20,7 @@ function stringProcess(str::AbstractString, config::Conf, isFile::Bool)::Abstrac
     if isFile && config.cutFileNames
         return cutString(cleanStr, config.maxFileChar)
     elseif !isFile && config.cutDirNames
-        return cutString(cleanStr, config.maxDireChar)
+        return cutString(cleanStr, config.maxDirChar)
     end
 end
 

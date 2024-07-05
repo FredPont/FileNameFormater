@@ -18,17 +18,17 @@
 using Pkg
 
 # install packages automatically
-function pkgAdd(list::Array{String,1})
-    for p in list
-        if !haskey(Pkg.project().dependencies, p)
-            Pkg.add(p)
-        end
-    end
+function pkgAdd(list::Array{String, 1})
+	for p in list
+		if !haskey(Pkg.project().dependencies, p)
+			Pkg.add(p)
+		end
+	end
 end
 
-pk = ["FilePathsBase"]
+pk = ["FilePathsBase", "JSON3", "StructTypes"]
 pkgAdd(pk)
 
 println("Precompilation...")
 
-using FilePathsBase
+using FilePathsBase, JSON3, StructTypes
