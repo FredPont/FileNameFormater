@@ -1,8 +1,8 @@
 {
     "path":"test",
     "maxFileChar": 30,
-    "cutFileNames": true,
-    "maxDirChar": 10,
-    "cutDirNames": true,
+    "cutFileNames": false,
+    "maxDirChar": 30,
+    "cutDirNames": false,
     "rules": []
 }

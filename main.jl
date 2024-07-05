@@ -47,6 +47,7 @@ function main()
 	input = readline(stdin)
 
 	if input == "y"
+        dir = config.path
 		rename_files_recursively(dir)
 		rename_dir_recursively(dir)
 	end
