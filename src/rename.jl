@@ -26,7 +26,7 @@ function rename_files_recursively(path)
         # Rename files
         for file in files
             old_path = joinpath(root, file)
-            new_path = joinpath(root, clean_string(file))
+            new_path = joinpath(root, stringProcess(file, config))
             if old_path != new_path
                 mv(old_path, new_path)
                 println("Renamed file: $old_path -> $new_path")
@@ -48,7 +48,7 @@ function listDirToRename(path)::Array{DirData,1}
     for (root, dirs, _) in walkdir(path)
         for d in dirs
             old_path = joinpath(root, d)
-            new_dir = clean_string(d)
+            new_dir = stringProcess(d, config; isFile = false)
             new_path = joinpath(root, new_dir)
             if old_path != new_path
                 push!(newDirs, DirData(d, old_path, new_dir, new_path))
