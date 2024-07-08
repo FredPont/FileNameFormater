@@ -27,7 +27,7 @@ function stringProcess(str::AbstractString, config::Conf; isFile::Bool = true)::
 end
 
 
-function clean_string(str::AbstractString)
+function clean_string(str::AbstractString)::AbstractString
 	rules = config.rules
 	for i ∈ 2:size(rules)[1] # :2 to skip first line
 		str = replace(str, Regex(rules[i, 1]) => rules[i, 2])
@@ -36,7 +36,7 @@ function clean_string(str::AbstractString)
 end
 
 
-function cutString(str::AbstractString, maxCharNumber::Int)
+function cutString(str::AbstractString, maxCharNumber::Int)::AbstractString
 	# get file extension if exists
 	root, ext = splitext(str)
 	if maxCharNumber < length(ext) + 1 || length(str) + 1 < maxCharNumber # do not cut string under 1 char
