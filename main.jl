@@ -42,15 +42,20 @@ function main()
     #test()
     config.rules = readRegex()
     config.exclude = loadExclude()
-
+    t1 = time()
     list_files_Dir(config.path)
-
+    t2 = time()
+    println("Elapsed time : ", t2 - t1, " sec !")
+    
     println("to rename the files, press y")
     input = readline(stdin)
 
     if input == "y"
+        t2 = time()
         rename_files_Dir(config.path)
     end
+    t3 = time()
+    println("Elapsed time : ", t3 - t2, " sec !")
 end
 
 main()

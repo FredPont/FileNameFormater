@@ -16,7 +16,6 @@
 
 # the advantage of package Continuables instead of walkdir is explained here :
 # https://discourse.julialang.org/t/what-is-the-correct-way-to-ignore-some-files-directories-in-walkdir/26780/4
-
 function rename_files_Dir(path)
     list_all(path) = @cont begin
         if isfile(path)
@@ -25,7 +24,7 @@ function rename_files_Dir(path)
                 mv(path, new_path)
                 println("Rename file: $path-> $new_path")
             end
-            cont(path)
+            cont(new_path)
             #endswith(path, ".jl") && cont(path)
         elseif isdir(path)
             basename(path) in (config.exclude) && return
