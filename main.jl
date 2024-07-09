@@ -18,12 +18,13 @@
 # using FilePathsBase
 
 mutable struct Conf
-	path::String
-	maxFileChar::Int  # max number of characters in filename
-	cutFileNames::Bool
-	maxDirChar::Int  # max number of characters in directory
-	cutDirNames::Bool
-	rules::Any
+    path::String
+    maxFileChar::Int  # max number of characters in filename
+    cutFileNames::Bool
+    maxDirChar::Int  # max number of characters in directory
+    cutDirNames::Bool
+    rules::Any
+    exclude::Any
 end
 
 include("src/installPKG.jl")
@@ -36,21 +37,20 @@ include("src/readConf.jl")
 
 global config = readConf()    # software preferences
 config.rules = readRegex()
+config.exclude = loadExclude()
 
 function main()
-	title()
-	test()
+    title()
+    test()
 
-	list_files_dirs_recursively(config)
+    list_files_Dir(config.path)
 
-	println("to rename the files, press y")
-	input = readline(stdin)
+    println("to rename the files, press y")
+    input = readline(stdin)
 
-	if input == "y"
-        dir = config.path
-		rename_files_recursively(dir)
-		rename_dir_recursively(dir)
-	end
+    if input == "y"
+        rename_files_Dir(config.path)
+    end
 
 
 end

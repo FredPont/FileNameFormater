@@ -30,3 +30,10 @@ function readConf()
 
     return userConf
 end
+
+function loadExclude(; path = "conf/excludeDirList.csv")
+    # Read the file, excluding lines starting with #
+    data = readdlm(path, '\t', String, comments = true, comment_char = '#')
+    println(data)
+    return data
+end

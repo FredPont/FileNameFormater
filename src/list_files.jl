@@ -16,36 +16,28 @@
 
 using FilePathsBase
 
-function list_files_dirs_recursively(config::Conf)
-	list_files_recursively(config.path)
-	list_dir_recursively(config.path)
+function list_files_Dir(path)
+    list_all(path) = @cont begin
+        if isfile(path)
+            new_path = joinpath(dirname(path), stringProcess(basename(path), config))
+            if path != new_path
+                println("Rename file: $path-> $new_path")
+            end
+            cont(path)
+            #endswith(path, ".ext") && cont(path)
+        elseif isdir(path)
+            new_path = joinpath(
+                dirname(path),
+                stringProcess(basename(path), config; isFile = false),
+            )
+            if path != new_path
+                println("Rename dir: $path-> $new_path")
+            end
+            basename(path) in (config.exclude) && return
+            for file in readdir(path)
+                foreach(cont, list_all(joinpath(path, file)))
+            end
+        end
+    end
+    collect(list_all(path))
 end
-
-function list_files_recursively(path)
-	for (root, dirs, files) in walkdir(path)
-		# Rename files
-		for file in files
-			old_path = joinpath(root, file)
-			new_path = joinpath(root, stringProcess(file, config))
-			if old_path != new_path
-				println("Rename file: $old_path -> $new_path")
-			end
-		end
-
-	end
-end
-
-function list_dir_recursively(path)
-	for (root, dirs, files) in walkdir(path)
-		# Rename files
-		for d in dirs
-			old_path = joinpath(path, d)
-			new_path = joinpath(path, stringProcess(d, config; isFile = false))
-			if old_path != new_path
-				println("Rename dir: $old_path -> $new_path")
-			end
-		end
-
-	end
-end
-

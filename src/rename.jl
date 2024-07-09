@@ -14,58 +14,32 @@
 # Written by Frederic PONT.
 # (c) Frederic Pont 2024
 
-mutable struct DirData
-    oldDir::String
-    oldPath::String
-    newDir::String
-    newPath::String
-end
 
-function rename_files_recursively(path)
-    for (root, dirs, files) in walkdir(path)
-        # Rename files
-        for file in files
-            old_path = joinpath(root, file)
-            new_path = joinpath(root, stringProcess(file, config))
-            if old_path != new_path
-                mv(old_path, new_path)
-                println("Renamed file: $old_path -> $new_path")
+function rename_files_Dir(path)
+    list_all(path) = @cont begin
+        if isfile(path)
+            new_path = joinpath(dirname(path), stringProcess(basename(path), config))
+            if path != new_path
+                mv(path, new_path)
+                println("Rename file: $path-> $new_path")
             end
-        end
-
-    end
-end
-
-
-function rename_dir_recursively(path)
-    dirList = listDirToRename(path)
-    renameDirList(dirList)
-end
-
-
-function listDirToRename(path)::Array{DirData,1}
-    newDirs = Array{DirData,1}()
-    for (root, dirs, _) in walkdir(path)
-        for d in dirs
-            old_path = joinpath(root, d)
-            new_dir = stringProcess(d, config; isFile = false)
-            new_path = joinpath(root, new_dir)
-            if old_path != new_path
-                push!(newDirs, DirData(d, old_path, new_dir, new_path))
+            cont(path)
+            #endswith(path, ".jl") && cont(path)
+        elseif isdir(path)
+            basename(path) in (config.exclude) && return
+            new_path = joinpath(
+                dirname(path),
+                stringProcess(basename(path), config; isFile = false),
+            )
+            if path != new_path
+                mv(path, new_path)
+                println("Rename dir: $path-> $new_path")
+            end
+            
+            for file in readdir(new_path)
+                foreach(cont, list_all(joinpath(new_path, file)))
             end
         end
     end
-    return newDirs
-end
-
-
-function renameDirList(dirList::Array{DirData,1})
-    for dirItem in reverse(dirList)	# reverse Array to start from the deepest dir to the highest
-        try
-            mv(dirItem.oldPath, dirItem.newPath)
-            println("Renamed directory: ", dirItem.oldPath, "->", dirItem.newPath)
-        catch err
-            showerror(stdout, err)
-        end
-    end
+    collect(list_all(path))
 end
