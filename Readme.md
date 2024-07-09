@@ -8,6 +8,7 @@ File Name Formater is a software to rename recursively files and folders, removi
 - install [Julia](https://julialang.org/downloads/)
 - open a terminal
 - to customise the characters replacement rules, edit the file ```conf/rules.csv ```(TAB seprator)
+- to exlude some directories, edit the file ```conf/excludeDirLis.csv ``` and enter one directory name per line
 - to enable file and/or dir names truncation, edit the file ```conf/conf.json```.
 CAUTION there is no recovery possible after file/dir names truncation.
 You use this feature at your own risks.

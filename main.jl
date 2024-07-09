@@ -36,12 +36,12 @@ include("src/title.jl")
 include("src/readConf.jl")
 
 global config = readConf()    # software preferences
-config.rules = readRegex()
-config.exclude = loadExclude()
 
 function main()
     title()
-    test()
+    #test()
+    config.rules = readRegex()
+    config.exclude = loadExclude()
 
     list_files_Dir(config.path)
 
@@ -51,8 +51,6 @@ function main()
     if input == "y"
         rename_files_Dir(config.path)
     end
-
-
 end
 
 main()
