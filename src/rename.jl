@@ -19,7 +19,7 @@ function rename_files_Dir(path)
     list_all(path) = @cont begin
         if isfile(path)
             new_path = joinpath(dirname(path), stringProcess(basename(path), config))
-            if path != new_path
+            if path != new_path && !isfile(new_path)
                 mv(path, new_path)
                 println("Rename file: $path-> $new_path")
             end
@@ -31,7 +31,7 @@ function rename_files_Dir(path)
                 dirname(path),
                 stringProcess(basename(path), config; isFile = false),
             )
-            if path != new_path
+            if path != new_path && !isdir(new_path)
                 mv(path, new_path)
                 println("Rename dir: $path-> $new_path")
             end
