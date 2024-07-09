@@ -22,7 +22,7 @@ function rename_files_Dir(path)
             new_path = joinpath(dirname(path), stringProcess(basename(path), config))
             if path != new_path && !isfile(new_path)
                 mv(path, new_path)
-                println("Rename file: $path-> $new_path")
+                println("Rename file: $path -> $new_path")
             end
             cont(new_path)
             #endswith(path, ".jl") && cont(path)
@@ -34,7 +34,7 @@ function rename_files_Dir(path)
             )
             if path != new_path && !isdir(new_path)
                 mv(path, new_path)
-                println("Rename dir: $path-> $new_path")
+                println("Rename dir: $path -> $new_path")
             end
             
             for file in readdir(new_path)

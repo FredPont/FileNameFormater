@@ -17,11 +17,13 @@
 using FilePathsBase
 
 function list_files_Dir(path)
+    log = open("logfile.log", "w")
     list_all(path) = @cont begin
         if isfile(path)
             new_path = joinpath(dirname(path), stringProcess(basename(path), config))
             if path != new_path
-                println("Rename file: $path-> $new_path")
+                println("Rename file: $path -> $new_path")
+                println(log, "$path -> $new_path")
             end
             cont(path)
             #endswith(path, ".ext") && cont(path)
@@ -32,6 +34,7 @@ function list_files_Dir(path)
             )
             if path != new_path
                 println("Rename dir: $path-> $new_path")
+                println(log, "$path -> $new_path")
             end
             basename(path) in (config.exclude) && return
             for file in readdir(path)
@@ -39,5 +42,8 @@ function list_files_Dir(path)
             end
         end
     end
+    
     collect(list_all(path))
+    close(log)
+    println("See log file for details")
 end
