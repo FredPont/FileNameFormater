@@ -6,9 +6,9 @@ File Name Formater is a software to rename recursively files and folders, removi
 # Features
 - Rename files
 - Rename directories
-- truncate the file names
-- truncate the dir names
-- exclude some directories
+- Truncate the file names
+- Truncate the dir names
+- Exclude some directories
 
 # Quick start
 - install [Julia](https://julialang.org/downloads/)
