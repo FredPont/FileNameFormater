@@ -29,7 +29,6 @@ maxFileChar = maximum number of char in file names
 cutFileNames : true/false enable/disable file names cutting
 maxDirChar = maximum number of char in dir names
 cutDirNames : true/false enable/disable dir names cutting
-rules : do no edit, rules are loaded from the conf/rules.csv file, easier to edit for tabular data
 ```
 
 ```
@@ -38,8 +37,7 @@ rules : do no edit, rules are loaded from the conf/rules.csv file, easier to edi
     "maxFileChar": 30,
     "cutFileNames": true,
     "maxDirChar": 30,
-    "cutDirNames": true,
-    "rules": []
+    "cutDirNames": true
 }
 
 ```
