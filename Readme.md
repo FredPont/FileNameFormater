@@ -1,18 +1,21 @@
 
 
 #  File Name Formater
-File Name Formater is a software to rename recursively files and folders, removing spaces and special characters.
+File Name Formater is a software to rename recursively files and folders.
 
 # Features
 - Rename files
 - Rename directories
+- unlimited number of regex patterns for renaming rules
 - Truncate the file names
 - Truncate the dir names
 - Exclude some directories
+- log file output
 
 # Quick start
 - install [Julia](https://julialang.org/downloads/)
 - open a terminal
+- go to the FileNameFormater directory using "cd" command
 - to customise the characters replacement rules, edit the file ```conf/rules.csv ```(TAB seprator)
 - to exclude some directories, edit the file ```conf/excludeDirList.csv ``` and enter one directory name (the name only, not the path) per line
 - to enable file and/or dir names truncation, edit the file ```conf/conf.json```.
