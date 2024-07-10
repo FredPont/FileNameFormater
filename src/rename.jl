@@ -27,7 +27,7 @@ function rename_files_Dir(path)
             cont(new_path)
             #endswith(path, ".jl") && cont(path)
         elseif isdir(path)
-            basename(path) in (config.exclude) && return
+            basename(path) in (config.exclude) && return    # skip directories in exclude list
             new_path = joinpath(
                 dirname(path),
                 stringProcess(basename(path), config; isFile = false),
