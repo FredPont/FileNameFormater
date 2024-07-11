@@ -13,7 +13,6 @@
 
 # Written by Frederic PONT.
 # (c) Frederic Pont 2024
-
 mutable struct Conf
     path::String
     maxFileChar::Int  # max number of characters in filename
@@ -24,35 +23,13 @@ mutable struct Conf
     exclude::Any
 end
 
+
 include("src/installPKG.jl")
 include("src/string_process.jl")
 include("src/unit_test.jl")
-include("src/list_files.jl")
-include("src/rename.jl")
-include("src/title.jl")
 include("src/readConf.jl")
 
 global config = readConf()    # software preferences
+config.rules = readRegex()
 
-function main()
-    title()
-    test()
-    config.rules = readRegex()
-    config.exclude = loadExclude()
-    t1 = time()
-    list_files_Dir(config.path)
-    t2 = time()
-    println("Elapsed time : ", t2 - t1, " sec !")
-    
-    println("to rename the files, press y")
-    input = readline(stdin)
-
-    if input == "y"
-        t2 = time()
-        rename_files_Dir(config.path)
-    end
-    t3 = time()
-    println("Elapsed time : ", t3 - t2, " sec !")
-end
-
-main()
+test()
