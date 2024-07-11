@@ -36,7 +36,7 @@ global config = readConf()    # software preferences
 
 function main()
     title()
-    test()
+    #test()
     config.rules = readRegex()
     config.exclude = loadExclude()
     t1 = time()
