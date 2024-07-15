@@ -17,33 +17,39 @@
 using FilePathsBase
 
 function list_files_Dir(path)
-	log = open("logfile.log", "w")
-	list_all(path) = @cont begin
-		if isfile(path)
-			new_path = joinpath(dirname(path), stringProcess(basename(path), config))
-			if path != new_path
-				println("file: $path → $new_path")
-				println(log, "$path → $new_path")
-			end
-			cont(path)
-			#endswith(path, ".ext") && cont(path)
-		elseif isdir(path)
-			new_path = joinpath(
-				dirname(path),
-				stringProcess(basename(path), config; isFile = false),
-			)
-			if path != new_path
-				println("dir : $path → $new_path")
-				println(log, "$path → $new_path")
-			end
-			basename(path) in (config.exclude) && return    # skip directories in exclude list
-			for file in readdir(path)
-				foreach(cont, list_all(joinpath(path, file)))
-			end
-		end
-	end
+    log = open("logfile.log", "w")
+    list_all(path) = @cont begin
+        if isfile(path)
+            new_path = joinpath(dirname(path), stringProcess(basename(path), config))
+            if path != new_path
+                print("file: ")
+                printstyled("$path", color = :light_magenta)
+                printstyled(" → $new_path\n", color = :yellow)
 
-	collect(list_all(path))
-	close(log)
-	println("See log file for details")
+                println(log, "$path → $new_path")
+            end
+            cont(path)
+            #endswith(path, ".ext") && cont(path)
+        elseif isdir(path)
+            new_path = joinpath(
+                dirname(path),
+                stringProcess(basename(path), config; isFile = false),
+            )
+            if path != new_path
+                print("dir : ")
+                printstyled("$path", color = :light_cyan)
+                printstyled(" → $new_path\n", color = :light_red)
+
+                println(log, "$path → $new_path")
+            end
+            basename(path) in (config.exclude) && return    # skip directories in exclude list
+            for file in readdir(path)
+                foreach(cont, list_all(joinpath(path, file)))
+            end
+        end
+    end
+
+    collect(list_all(path))
+    close(log)
+    println("See log file for details")
 end
