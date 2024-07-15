@@ -22,8 +22,8 @@ function list_files_Dir(path)
 		if isfile(path)
 			new_path = joinpath(dirname(path), stringProcess(basename(path), config))
 			if path != new_path
-				println("Rename file: $path -> $new_path")
-				println(log, "$path -> $new_path")
+				println("file: $path → $new_path")
+				println(log, "$path → $new_path")
 			end
 			cont(path)
 			#endswith(path, ".ext") && cont(path)
@@ -33,8 +33,8 @@ function list_files_Dir(path)
 				stringProcess(basename(path), config; isFile = false),
 			)
 			if path != new_path
-				println("Rename dir: $path-> $new_path")
-				println(log, "$path -> $new_path")
+				println("dir : $path → $new_path")
+				println(log, "$path → $new_path")
 			end
 			basename(path) in (config.exclude) && return    # skip directories in exclude list
 			for file in readdir(path)
