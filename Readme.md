@@ -2,6 +2,8 @@
 
 #  File Name Formater
 File Name Formater is a software to rename recursively files and folders.
+CAUTION there is no recovery possible after file/dir names renaming or truncation.
+You use this software at your own risks.
 
 # Features
 - Rename files
@@ -47,8 +49,6 @@ cutDirNames : true/false enable/disable dir names cutting
 ```
 julia main.jl 
 ```
-CAUTION there is no recovery possible after file/dir names renaming or truncation.
-You use this feature at your own risks.
 
 # ScreenShots
 ![CLI](src/images/screenshot.png)
