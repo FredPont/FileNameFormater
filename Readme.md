@@ -6,8 +6,8 @@ CAUTION there is no recovery possible after file/dir names renaming or truncatio
 You use this software at your own risks.
 
 # Features
-- Rename files
-- Rename directories
+- Rename files (replace spaces, accents, special char...or use custom rules)
+- Rename directories (replace spaces, accents, special char...or use custom rules)
 - unlimited number of regex patterns for renaming rules
 - Truncate the file names
 - Truncate the dir names
