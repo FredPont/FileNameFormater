@@ -55,9 +55,9 @@ function main()
 
 	if input == "y"
 		t2 = time()
-		prog = ProgressUnknown(desc = "Listing in progress:", spinner = true)  # Create a progress meter
+		prog = ProgressUnknown(desc = "Renaming in progress:", spinner = true)  # Create a progress meter
 		rename_files_Dir(config.path, prog)
-		finish!(prog)
+		finish!(prog)  # Finish the progress meter
 	end
 	t3 = time()
 	println("Elapsed time : ", t3 - t2, " sec !")
