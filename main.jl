@@ -41,7 +41,11 @@ function main()
     config.rules = readRegex()
     config.exclude = loadExclude()
     t1 = time()
+
+    prog = ProgressUnknown(desc="Working hard:", spinner=true)  # spinner
     list_files_Dir(config.path)
+    finish!(prog)
+
     t2 = time()
     println("Elapsed time : ", t2 - t1, " sec !")
     
@@ -50,7 +54,9 @@ function main()
 
     if input == "y"
         t2 = time()
+        prog = ProgressUnknown(desc="Working hard:", spinner=true)  # spinner
         rename_files_Dir(config.path)
+        finish!(prog)
     end
     t3 = time()
     println("Elapsed time : ", t3 - t2, " sec !")

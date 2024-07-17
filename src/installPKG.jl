@@ -26,9 +26,9 @@ function pkgAdd(list::Array{String, 1})
 	end
 end
 
-pk = ["FilePathsBase", "JSON3", "Continuables"]
+pk = ["FilePathsBase", "JSON3", "Continuables", "ProgressMeter"]
 pkgAdd(pk)
 
 println("Precompilation...")
 
-using FilePathsBase, JSON3, Continuables
+using FilePathsBase, JSON3, Continuables, ProgressMeter
