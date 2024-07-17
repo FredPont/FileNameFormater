@@ -16,10 +16,11 @@
 
 mutable struct Conf
     path::String
-    maxFileChar::Int  # max number of characters in filename
+    maxFileChar::Int        # max number of characters in filename
     cutFileNames::Bool
-    maxDirChar::Int  # max number of characters in directory
+    maxDirChar::Int         # max number of characters in directory
     cutDirNames::Bool
+    terminalOutput::Bool    # print files/dir on the terminal
     rules::Any
     exclude::Any
 end

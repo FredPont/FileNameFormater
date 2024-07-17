@@ -17,34 +17,39 @@
 # the advantage of package Continuables instead of walkdir is explained here :
 # https://discourse.julialang.org/t/what-is-the-correct-way-to-ignore-some-files-directories-in-walkdir/26780/4
 function rename_files_Dir(path)
-    list_all(path) = @cont begin
-        if isfile(path)
-            new_path = joinpath(dirname(path), stringProcess(basename(path), config))
-            if path != new_path && !isfile(new_path)
-                mv(path, new_path)
-                print("file: ")
-                printstyled("$path", color = :light_magenta)
-                printstyled(" → $new_path\n", color = :yellow)
-            end
-            cont(new_path)
-            #endswith(path, ".jl") && cont(path)
-        elseif isdir(path)
-            basename(path) in (config.exclude) && return    # skip directories in exclude list
-            new_path = joinpath(
-                dirname(path),
-                stringProcess(basename(path), config; isFile = false),
-            )
-            if path != new_path && !isdir(new_path)
-                mv(path, new_path)
-                print("dir : ")
-                printstyled("$path", color = :light_cyan)
-                printstyled(" → $new_path\n", color = :light_red)
-            end
-            
-            for file in readdir(new_path)
-                foreach(cont, list_all(joinpath(new_path, file)))
-            end
-        end
-    end
-    collect(list_all(path))
+	log = open("logfile.log", "a")
+	list_all(path) = @cont begin
+		if isfile(path)
+			new_path = joinpath(dirname(path), stringProcess(basename(path), config))
+			if path != new_path && !isfile(new_path)
+				try
+					mv(path, new_path)
+					prettyPrint("file", path::AbstractString, new_path::AbstractString, :light_magenta, :yellow)
+				catch err
+					println(log, "@warn! $path → $new_path : $err")
+				end
+			end
+			cont(new_path)
+			#endswith(path, ".jl") && cont(path)
+		elseif isdir(path)
+			basename(path) in (config.exclude) && return    # skip directories in exclude list
+			new_path = joinpath(
+				dirname(path),
+				stringProcess(basename(path), config; isFile = false),
+			)
+			if path != new_path && !isdir(new_path)
+				try
+					mv(path, new_path)
+					prettyPrint("dir", path::AbstractString, new_path::AbstractString, :light_cyan, :light_red)
+				catch err
+					println(log, "@warn ! $path → $new_path : $err")
+				end
+			end
+
+			for file in readdir(new_path)
+				foreach(cont, list_all(joinpath(new_path, file)))
+			end
+		end
+	end
+	collect(list_all(path))
 end

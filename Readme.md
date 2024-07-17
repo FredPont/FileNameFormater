@@ -31,15 +31,17 @@ maxFileChar = maximum number of char in file names
 cutFileNames : true/false enable/disable file names cutting
 maxDirChar = maximum number of char in dir names
 cutDirNames : true/false enable/disable dir names cutting
+terminalOutput: true/false enable/disable print file/dir names on the terminal
 ```
 
 ```
 {
     "path":"test",
     "maxFileChar": 30,
-    "cutFileNames": true,
+    "cutFileNames": false,
     "maxDirChar": 30,
-    "cutDirNames": true
+    "cutDirNames": false,
+    "terminalOutput" : false
 }
 
 ```

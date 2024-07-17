@@ -23,7 +23,6 @@ function list_files_Dir(path)
 			new_path = joinpath(dirname(path), stringProcess(basename(path), config))
 			if path != new_path
 				prettyPrint("file", path::AbstractString, new_path::AbstractString, :light_magenta, :yellow)
-				
 				println(log, "$path → $new_path")
 			end
 			cont(path)
@@ -35,7 +34,6 @@ function list_files_Dir(path)
 			)
 			if path != new_path
 				prettyPrint("dir", path::AbstractString, new_path::AbstractString, :light_cyan, :light_red)
-				
 				println(log, "$path → $new_path")
 			end
 			basename(path) in (config.exclude) && return    # skip directories in exclude list
@@ -52,7 +50,9 @@ end
 
 
 function prettyPrint(title::AbstractString, path::AbstractString, new_path::AbstractString, color1, color2)
-	print("$title: ")
-	printstyled("$path", color = color1)
-	printstyled(" → $new_path\n", color = color2)
+	if config.terminalOutput
+		print("$title: ")
+		printstyled("$path", color = color1)
+		printstyled(" → $new_path\n", color = color2)
+	end
 end

@@ -3,5 +3,6 @@
     "maxFileChar": 30,
     "cutFileNames": false,
     "maxDirChar": 30,
-    "cutDirNames": false
+    "cutDirNames": false,
+    "terminalOutput" : false
 }
