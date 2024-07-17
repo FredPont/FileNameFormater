@@ -16,7 +16,7 @@
 
 # the advantage of package Continuables instead of walkdir is explained here :
 # https://discourse.julialang.org/t/what-is-the-correct-way-to-ignore-some-files-directories-in-walkdir/26780/4
-function rename_files_Dir(path, prog)
+function rename_files_Dir(path::AbstractString, prog::ProgressUnknown)
 	log = open("logfile.log", "a")
 	list_all(path) = @cont begin
         next!(prog) # update progress bar

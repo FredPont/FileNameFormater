@@ -16,7 +16,7 @@
 
 using FilePathsBase
 
-function list_files_Dir(path, prog)
+function list_files_Dir(path::AbstractString, prog::ProgressUnknown)
 	log = open("logfile.log", "w")
 	list_all(path) = @cont begin
 		next!(prog) # update progress bar

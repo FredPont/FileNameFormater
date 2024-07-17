@@ -43,7 +43,6 @@ function main()
 	t1 = time()
 
 	prog = ProgressUnknown(desc = "Listing in progress:", spinner = true)  # Create a progress meter
-	next!(prog)  # Update the progress meter
 	list_files_Dir(config.path, prog)
 	finish!(prog)  # Finish the progress meter
 
