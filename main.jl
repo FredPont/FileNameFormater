@@ -15,14 +15,14 @@
 # (c) Frederic Pont 2024
 
 mutable struct Conf
-    path::String
-    maxFileChar::Int        # max number of characters in filename
-    cutFileNames::Bool
-    maxDirChar::Int         # max number of characters in directory
-    cutDirNames::Bool
-    terminalOutput::Bool    # print files/dir on the terminal
-    rules::Any
-    exclude::Any
+	path::String
+	maxFileChar::Int        # max number of characters in filename
+	cutFileNames::Bool
+	maxDirChar::Int         # max number of characters in directory
+	cutDirNames::Bool
+	terminalOutput::Bool    # print files/dir on the terminal
+	rules::Any
+	exclude::Any
 end
 
 include("src/installPKG.jl")
@@ -36,30 +36,31 @@ include("src/readConf.jl")
 global config = readConf()    # software preferences
 
 function main()
-    title()
-    #test()
-    config.rules = readRegex()
-    config.exclude = loadExclude()
-    t1 = time()
+	title()
+	#test()
+	config.rules = readRegex()
+	config.exclude = loadExclude()
+	t1 = time()
 
-    prog = ProgressUnknown(desc="Working hard:", spinner=true)  # spinner
-    list_files_Dir(config.path)
-    finish!(prog)
+	prog = ProgressUnknown(desc = "Listing in progress:", spinner = true)  # Create a progress meter
+	next!(prog)  # Update the progress meter
+	list_files_Dir(config.path, prog)
+	finish!(prog)  # Finish the progress meter
 
-    t2 = time()
-    println("Elapsed time : ", t2 - t1, " sec !")
-    
-    println("to rename the files, press y")
-    input = readline(stdin)
+	t2 = time()
+	println("Elapsed time : ", t2 - t1, " sec !")
 
-    if input == "y"
-        t2 = time()
-        prog = ProgressUnknown(desc="Working hard:", spinner=true)  # spinner
-        rename_files_Dir(config.path)
-        finish!(prog)
-    end
-    t3 = time()
-    println("Elapsed time : ", t3 - t2, " sec !")
+	println("to rename the files, press y")
+	input = readline(stdin)
+
+	if input == "y"
+		t2 = time()
+		prog = ProgressUnknown(desc = "Listing in progress:", spinner = true)  # Create a progress meter
+		rename_files_Dir(config.path, prog)
+		finish!(prog)
+	end
+	t3 = time()
+	println("Elapsed time : ", t3 - t2, " sec !")
 end
 
 main()

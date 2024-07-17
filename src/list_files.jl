@@ -16,9 +16,10 @@
 
 using FilePathsBase
 
-function list_files_Dir(path)
+function list_files_Dir(path, prog)
 	log = open("logfile.log", "w")
 	list_all(path) = @cont begin
+		next!(prog) # update progress bar
 		if isfile(path)
 			new_path = joinpath(dirname(path), stringProcess(basename(path), config))
 			if path != new_path
@@ -45,7 +46,7 @@ function list_files_Dir(path)
 
 	collect(list_all(path))
 	close(log)
-	println("See log file for details")
+	println("\nSee log file for details")
 end
 
 
