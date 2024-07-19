@@ -2,8 +2,11 @@
 
 #  File Name Formater
 File Name Formater is a software to rename recursively files and folders.
+
 CAUTION there is no recovery possible after file/dir names renaming or truncation.
 You use this software at your own risks.
+
+The software does not overwrite a file (`force=false`). It is possible that after renaming a file is identical to a file that already exist. For example if both file `$~myFileName` and `myFileName` exists, the software will not overwrite the file `myFileName` and leave `$~myFileName` unchanged.
 
 # Features
 - Rename files (replace spaces, accents, special char...or use custom rules)
@@ -13,6 +16,7 @@ You use this software at your own risks.
 - Truncate the dir names
 - Exclude some directories
 - log file output
+- optional terminal output
 
 # Quick start
 - install [Julia](https://julialang.org/downloads/)
