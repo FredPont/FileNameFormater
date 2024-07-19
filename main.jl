@@ -22,7 +22,8 @@ mutable struct Conf
 	cutDirNames::Bool
 	terminalOutput::Bool    # print files/dir on the terminal
 	rules::Any
-	exclude::Any
+	excludeDir::Any
+	excludeFiles::Any
 end
 
 include("src/installPKG.jl")
@@ -39,7 +40,8 @@ function main()
 	title()
 	#test()
 	config.rules = readRegex()
-	config.exclude = loadExclude()
+	config.excludeDir = loadExcludeDirs()
+	config.excludeFiles = loadExcludeFiles()
 	t1 = time()
 
 	prog = ProgressUnknown(desc = "Listing in progress:", spinner = true)  # Create a progress meter

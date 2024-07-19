@@ -31,9 +31,17 @@ function readConf()
     return userConf
 end
 
-function loadExclude(; path = "conf/excludeDirList.csv")
+function loadExcludeDirs(; path = "conf/excludeDirList.csv")
     # Read the file, excluding lines starting with #
     data = readdlm(path, '\t', String, comments = true, comment_char = '#')
     println("exclude dirs : ", data)
+    return data
+end
+
+
+function loadExcludeFiles(; path = "conf/excludeFileList.csv")
+    # Read the file, excluding lines starting with #
+    data = readdlm(path, '\t', String, comments = true, comment_char = '#')
+    println("exclude files : ", data)
     return data
 end

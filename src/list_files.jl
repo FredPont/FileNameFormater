@@ -22,12 +22,11 @@ function list_files_Dir(path::AbstractString, prog::ProgressUnknown)
 		next!(prog) # update progress bar
 		if isfile(path)
 			new_path = joinpath(dirname(path), stringProcess(basename(path), config))
-			if path != new_path
+			if path != new_path && isValidFile(basename(path))
 				prettyPrint("file", path::AbstractString, new_path::AbstractString, :light_magenta, :yellow)
 				println(log, "$path → $new_path")
 			end
 			cont(path)
-			#endswith(path, ".ext") && cont(path)
 		elseif isdir(path)
 			new_path = joinpath(
 				dirname(path),
@@ -37,7 +36,7 @@ function list_files_Dir(path::AbstractString, prog::ProgressUnknown)
 				prettyPrint("dir", path::AbstractString, new_path::AbstractString, :light_cyan, :light_red)
 				println(log, "$path → $new_path")
 			end
-			basename(path) in (config.exclude) && return    # skip directories in exclude list
+			basename(path) in (config.excludeDir) && return    # skip directories in exclude list
 			for file in readdir(path)
 				foreach(cont, list_all(joinpath(path, file)))
 			end

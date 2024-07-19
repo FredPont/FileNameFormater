@@ -47,3 +47,14 @@ function cutString(str::AbstractString, maxCharNumber::Int)::AbstractString
 		return str
 	end
 end
+
+# isValidFile return true if the filename do not match exclude file list
+function isValidFile(filename::AbstractString)::Bool
+	rules = config.excludeFiles
+	for reg ∈ rules
+		if occursin(Regex(reg), filename)
+			return false
+		end
+	end
+	return true
+end

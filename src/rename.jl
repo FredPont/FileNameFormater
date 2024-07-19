@@ -22,7 +22,7 @@ function rename_files_Dir(path::AbstractString, prog::ProgressUnknown)
         next!(prog) # update progress bar
 		if isfile(path)
 			new_path = joinpath(dirname(path), stringProcess(basename(path), config))
-			if path != new_path && !isfile(new_path)
+			if path != new_path && !isfile(new_path) && isValidFile(basename(path))
 				try
 					mv(path, new_path)
 					prettyPrint("file", path::AbstractString, new_path::AbstractString, :light_magenta, :yellow)
@@ -31,9 +31,8 @@ function rename_files_Dir(path::AbstractString, prog::ProgressUnknown)
 				end
 			end
 			cont(new_path)
-			#endswith(path, ".jl") && cont(path)
 		elseif isdir(path)
-			basename(path) in (config.exclude) && return    # skip directories in exclude list
+			basename(path) in (config.excludeDir) && return    # skip directories in exclude list
 			new_path = joinpath(
 				dirname(path),
 				stringProcess(basename(path), config; isFile = false),

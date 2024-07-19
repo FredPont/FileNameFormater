@@ -1,0 +1,6 @@
+# Enter here the files to exclude, one per line
+# regex matching file names are allowed
+#
+#~snapshot
+^~\$.*
+#testg
