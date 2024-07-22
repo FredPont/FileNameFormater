@@ -15,15 +15,15 @@
 # (c) Frederic Pont 2024
 
 mutable struct Conf
-	path::String
-	maxFileChar::Int        # max number of characters in filename
-	cutFileNames::Bool
-	maxDirChar::Int         # max number of characters in directory
-	cutDirNames::Bool
-	terminalOutput::Bool    # print files/dir on the terminal
-	rules::Any
-	excludeDir::Any
-	excludeFiles::Any
+    path::String
+    maxFileChar::Int        # max number of characters in filename
+    cutFileNames::Bool
+    maxDirChar::Int         # max number of characters in directory
+    cutDirNames::Bool
+    terminalOutput::Bool    # print files/dir on the terminal
+    rules::Any
+    excludeDir::Any
+    excludeFiles::Any
 end
 
 include("src/installPKG.jl")
@@ -37,31 +37,39 @@ include("src/readConf.jl")
 global config = readConf()    # software preferences
 
 function main()
-	title()
-	#test()
-	config.rules = readRegex()
-	config.excludeDir = loadExcludeDirs()
-	config.excludeFiles = loadExcludeFiles()
-	t1 = time()
+    title()
+    #test()
+    config.rules = readRegex()
+    config.excludeDir = loadExcludeDirs()
+    config.excludeFiles = loadExcludeFiles()
+    t1 = time()
 
-	prog = ProgressUnknown(desc = "Listing in progress:", spinner = true)  # Create a progress meter
-	list_files_Dir(config.path, prog)
-	finish!(prog)  # Finish the progress meter
+    prog = ProgressUnknown(
+        desc = "Listing in progress:",
+        spinner = true;
+        enabled = !config.terminalOutput, # disable progress bar when terminalOutput
+    )  # Create a progress meter
+    list_files_Dir(config.path, prog)
+    finish!(prog)  # Finish the progress meter
 
-	t2 = time()
-	println("Elapsed time : ", t2 - t1, " sec !")
+    t2 = time()
+    println("Elapsed time : ", t2 - t1, " sec !")
 
-	println("to rename the files, press y")
-	input = readline(stdin)
+    println("to rename the files, press y")
+    input = readline(stdin)
 
-	if input == "y"
-		t2 = time()
-		prog = ProgressUnknown(desc = "Renaming in progress:", spinner = true)  # Create a progress meter
-		rename_files_Dir(config.path, prog)
-		finish!(prog)  # Finish the progress meter
-	end
-	t3 = time()
-	println("Elapsed time : ", t3 - t2, " sec !")
+    if input == "y"
+        t2 = time()
+        prog = ProgressUnknown(
+            desc = "Renaming in progress:",
+            spinner = true;
+            enabled = !config.terminalOutput, # disable progress bar when terminalOutput
+        )  # Create a progress meter
+        rename_files_Dir(config.path, prog)
+        finish!(prog)  # Finish the progress meter
+    end
+    t3 = time()
+    println("Elapsed time : ", t3 - t2, " sec !")
 end
 
 main()
