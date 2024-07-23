@@ -17,40 +17,40 @@
 # the advantage of package Continuables instead of walkdir is explained here :
 # https://discourse.julialang.org/t/what-is-the-correct-way-to-ignore-some-files-directories-in-walkdir/26780/4
 function rename_files_Dir(path::AbstractString, prog::ProgressUnknown)
-	log = open("logfile.log", "a")
-	list_all(path) = @cont begin
+    log = open("logfile.log", "w")
+    list_all(path) = @cont begin
         next!(prog) # update progress bar
-		if isfile(path)
-			new_path = joinpath(dirname(path), stringProcess(basename(path), config))
-			if path != new_path && !isfile(new_path) && isValidFile(basename(path))
-				try
-					mv(path, new_path)
-					prettyPrint("file", path::AbstractString, new_path::AbstractString, :light_magenta, :yellow)
-				catch err
-					println(log, "@warn! $path → $new_path : $err")
-				end
-			end
-			cont(new_path)
-		elseif isdir(path)
-			basename(path) in (config.excludeDir) && return    # skip directories in exclude list
-			new_path = joinpath(
-				dirname(path),
-				stringProcess(basename(path), config; isFile = false),
-			)
-			if path != new_path && !isdir(new_path)
-				try
-					mv(path, new_path)
-					prettyPrint("dir", path::AbstractString, new_path::AbstractString, :light_cyan, :light_red)
-				catch err
-					println(log, "@warn ! $path → $new_path : $err")
-				end
-			end
+        if isfile(path)
+            new_path = joinpath(dirname(path), stringProcess(basename(path), config))
+            if path != new_path && !isfile(new_path) && isValidFile(basename(path))
+                try
+                    logAndTermOutput(log, "file", path, new_path, :light_magenta, :yellow)
+                    mv(path, new_path)
+                catch err
+                    println(log, "@warn! $path → $new_path : $err")
+                end
+            end
+            cont(new_path)
+        elseif isdir(path)
+            basename(path) in (config.excludeDir) && return    # skip directories in exclude list
+            new_path = joinpath(
+                dirname(path),
+                stringProcess(basename(path), config; isFile = false),
+            )
+            if path != new_path && !isdir(new_path)
+                try
+                    logAndTermOutput(log, "dir", path, new_path, :light_cyan, :light_red)
+                    mv(path, new_path)
+                catch err
+                    println(log, "@warn ! $path → $new_path : $err")
+                end
+            end
 
-			for file in readdir(new_path)
-				foreach(cont, list_all(joinpath(new_path, file)))
-			end
-		end
-	end
-	collect(list_all(path))
+            for file in readdir(new_path)
+                foreach(cont, list_all(joinpath(new_path, file)))
+            end
+        end
+    end
+    collect(list_all(path))
     close(log)
 end

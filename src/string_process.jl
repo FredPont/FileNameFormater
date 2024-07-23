@@ -26,7 +26,7 @@ function stringProcess(str::AbstractString, config::Conf; isFile::Bool = true)::
 	end
 end
 
-
+# clean_string remove special char and rename string according to the config.rules list of user regex
 function clean_string(str::AbstractString)::AbstractString
 	rules = config.rules
 	for i ∈ 2:size(rules)[1] # :2 to skip first line
