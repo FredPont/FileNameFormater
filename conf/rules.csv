@@ -3,3 +3,4 @@ Regex	Replace_by	Comment
 [\s]+	_	replace spaces by underscore
 [à]+	a	replace à by a
 [éèêë]+	e	replace éèêë by e
+[ÉÊ]+	E	replace ÉÊ by E
