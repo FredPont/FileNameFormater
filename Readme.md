@@ -24,7 +24,7 @@ The software does not overwrite a file (`force=false`). It is possible that afte
 - open a terminal
 - go to the FileNameFormater directory using "cd" command
 - to customise the characters replacement rules, edit the file ```conf/rules.csv ```(TAB seprator)
-- to exclude some directories, edit the file ```conf/excludeDirList.csv ``` and enter one directory name (the name only, not the path) per line
+- to exclude some directories, edit the file ```conf/excludeDirList.csv ``` and enter one directory name (the name only, not the path) per line. Dir names are interpreted as strings.
 - to exclude some files or file patterns, edit the file ```conf/excludeFileList.csv ``` and enter one file name (the name only, not the path) or regular expression per line. File names are interpreted as regular expressions. To match exactly a file name, use ^filename$
 - to enable file and/or dir names truncation, edit the file ```conf/conf.json```.
 
