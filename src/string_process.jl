@@ -42,14 +42,12 @@ end
 
 function cutString(str::AbstractString, maxCharNumber::Int)::AbstractString
     # get file extension if exists
-    root, ext = splitext(str)
-    if maxCharNumber < length(ext) + 1 || length(str) < maxCharNumber # do not cut string under 1 char
-        return str
-    elseif length(str) > maxCharNumber
+    _, ext = splitext(str)
+
+    if length(str) > maxCharNumber && length(ext) < maxCharNumber
         return substring(str, 1, maxCharNumber - length(ext)) * ext   # cut the string to maxCharNumber and substract the extension length
-    else
-        return str
     end
+    return str
 end
 
 # isValidFile return true if the filename do not match exclude file list
