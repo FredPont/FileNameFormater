@@ -1,6 +1,6 @@
 Regex	Replace_by	Comment
 [^\w\s.\-_]+		matches any whitespace characters \s   and any non-word characters \w, dot, - and _spaces  and replace by nothing
 [\s]+	_	replace spaces by underscore
-[à]+	a	replace à by a
+[àâä]+	a	replace à by a
 [éèêë]+	e	replace éèêë by e
 [ÉÊ]+	E	replace ÉÊ by E

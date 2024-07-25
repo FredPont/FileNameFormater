@@ -30,14 +30,20 @@ function test()
     end
 
     @testset "Regex test" begin
-        @test replace("Hello, this is a string with spécial chàracters and spaces!", r"[^\w\s.\-_]+" => "") == "Hello this is a string with spécial chàracters and spaces"
+        @test replace(
+            "Hello, this is a string with spécial chàracters and spaces!",
+            r"[^\w\s.\-_]+" => "",
+        ) == "Hello this is a string with spécial chàracters and spaces"
     end
 
     @testset "cut string test" begin
-         @test cutString("textfilename.txt", 7) == "tex.txt"
+        @test cutString("textfilename.txt", 7) == "tex.txt"
         @test cutString("text.txt", 5) == "t.txt"
         @test cutString("textfilename", 5) == "textf"
         @test cutString("text.txt", 3) == "text.txt"
+        @test cutString("deux_cent_mille_malles_mal_mâles.xlsx", 30) ==
+              "deux_cent_mille_malles_ma.xlsx"
+        @test cutString("mâles", 3) == "mâl"
     end
     println("end test")
     println(".................")
