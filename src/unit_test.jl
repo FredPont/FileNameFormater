@@ -27,6 +27,9 @@ function test()
         @test clean_string("file_1.txt") == "file_1.txt"
         @test clean_string("file-1.txt") == "file-1.txt"
         @test clean_string("file&1.txt") == "file1.txt"
+        @test clean_string("string_-_with_-_underscores_-_.txt") == "string_with_underscores_.txt"
+        @test clean_string("string___with___underscores___.txt") == "string_with_underscores_.txt"
+        @test clean_string("string   with   spaces.txt") == "string_with_spaces.txt"
     end
 
     @testset "Regex test" begin
