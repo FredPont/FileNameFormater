@@ -6,3 +6,5 @@ Regex	Replace_by	Comment
 [ÉÊ]+	E	replace ÉÊ by E
 _-_	_	
 _+	_	replace n underscores by one
+[ÔÖ]+	O	Replace ÔÖ by O
+[ôö]+	o	Replace ÔÖ by O
