@@ -30,6 +30,7 @@ function test()
         @test clean_string("string_-_with_-_underscores_-_.txt") == "string_with_underscores_.txt"
         @test clean_string("string___with___underscores___.txt") == "string_with_underscores_.txt"
         @test clean_string("string   with   spaces.txt") == "string_with_spaces.txt"
+        @test clean_string("ôÔabéêè   with") == "oOabe_with"
     end
 
     @testset "Regex test" begin
