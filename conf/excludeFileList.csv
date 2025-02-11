@@ -3,3 +3,4 @@
 # to match exactly a file name, use ^filename$
 #
 ^~\$.*
+^\.~.*
