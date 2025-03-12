@@ -62,10 +62,14 @@ function isValidFile(filename::AbstractString)::Bool
 end
 
 # isValidDir return true if the direname do not match exclude dir list (using regex)
-function isValidDir(direname::AbstractString)::Bool
-    rules = config.excludeDirs
+function isValidDir(dirName::AbstractString)::Bool
+    rules = config.excludeDir
+    if !config.excludeDirByRegex
+        #println("excludeDir : ", dirName, " ", dirName ∉ rules)
+        return dirName ∉ rules
+    end
     for reg ∈ rules
-        if occursin(Regex(reg), dirname)
+        if occursin(Regex(reg), dirName)
             return false
         end
     end

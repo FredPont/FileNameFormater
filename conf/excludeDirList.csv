@@ -2,5 +2,9 @@
 # this is a comment
 #
 #~snapshot
+# to exclude all directories ending with ~snapshot using regex : ~snapshot$
+# to exclude .git and .test directories with string match
 .git
-#testg
+.test
+# to exclude all directories starting with a dot using regex : ^\.
+#^\.

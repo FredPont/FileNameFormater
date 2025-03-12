@@ -4,5 +4,6 @@
     "cutFileNames": false,
     "maxDirChar": 30,
     "cutDirNames": false,
-    "terminalOutput" : false
+    "terminalOutput" : true,
+    "excludeDirByRegex" : false
 }

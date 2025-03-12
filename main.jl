@@ -23,6 +23,7 @@ mutable struct Conf
     terminalOutput::Bool    # print files/dir on the terminal
     rules::Any
     excludeDir::Any
+    excludeDirByRegex::Bool # use regex instead of string to exclude directories
     excludeFiles::Any
 end
 
