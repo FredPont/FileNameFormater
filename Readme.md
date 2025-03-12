@@ -41,6 +41,7 @@ cutFileNames : true/false enable/disable file names cutting
 maxDirChar = maximum number of char in dir names
 cutDirNames : true/false enable/disable dir names cutting
 terminalOutput: true/false enable/disable print file/dir names on the terminal
+excludeDirByRegex : true/false enable/disable directory exclusion by regex instead of string
 ```
 
 ```
@@ -50,7 +51,8 @@ terminalOutput: true/false enable/disable print file/dir names on the terminal
     "cutFileNames": false,
     "maxDirChar": 30,
     "cutDirNames": false,
-    "terminalOutput" : false
+    "terminalOutput" : false,
+    "excludeDirByRegex" : false
 }
 
 ```
