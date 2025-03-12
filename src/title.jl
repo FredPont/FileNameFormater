@@ -16,8 +16,8 @@
 
 
 function title()
-    println("   ┌────────────────────────────────────────────┐") # unicode U+250C
-    println("   │   Format File Names (c)Frederic PONT 2024  │")
-    println("   │  Free Software GNU General Public License  │")
-    println("   └────────────────────────────────────────────┘")
+    println("   ┌────────────────────────────────────────────────────┐") # unicode U+250C
+    println("   │ Format File Names v20250312 (c)Frederic PONT 2024  │")
+    println("   │      Free Software GNU General Public License      │")
+    println("   └────────────────────────────────────────────────────┘")
 end

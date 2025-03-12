@@ -50,11 +50,22 @@ function cutString(str::AbstractString, maxCharNumber::Int)::AbstractString
     return str
 end
 
-# isValidFile return true if the filename do not match exclude file list
+# isValidFile return true if the filename do not match exclude file list (using regex)
 function isValidFile(filename::AbstractString)::Bool
     rules = config.excludeFiles
     for reg ∈ rules
         if occursin(Regex(reg), filename)
+            return false
+        end
+    end
+    return true
+end
+
+# isValidDir return true if the direname do not match exclude dir list (using regex)
+function isValidDir(direname::AbstractString)::Bool
+    rules = config.excludeDirs
+    for reg ∈ rules
+        if occursin(Regex(reg), dirname)
             return false
         end
     end
