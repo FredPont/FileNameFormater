@@ -60,7 +60,14 @@ excludeDirByRegex : true/false enable/disable directory exclusion by regex inste
 - start the software using the syntax :
 
 ```
-julia main.jl 
+julia main.jl
+
+The path to be processed can be given as an argument. For example :
+
+julia main.jl /home/user/dir_to_analyze
+
+in this case, the software will process the directory /home/user/dir_to_analyze and ignore the path given in the configuration file.
+
 ```
 
 # ScreenShots

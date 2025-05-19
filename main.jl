@@ -38,7 +38,11 @@ include("src/readConf.jl")
 global config = readConf()    # software preferences
 
 function main()
-    title()
+    # if the path is given as an argument, use it as the path to process
+    if length(ARGS) > 0
+    config.path = ARGS[1]
+end
+	title()
     #test()
     config.rules = readRegex()
     config.excludeDir = loadExcludeDirs()
